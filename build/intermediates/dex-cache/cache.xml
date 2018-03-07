@@ -1,0 +1,32 @@
+<?xml version="1.0" encoding="utf-8"?>
+<items version="2" >
+
+    <item
+        is-multidex="false"
+        jar="/Users/vineeth/.gradle/caches/modules-2/files-2.1/org.apache.commons/commons-lang3/3.0/8873bd0bb5cb9ee37f1b04578eb7e26fcdd44cb0/commons-lang3-3.0.jar"
+        jumboMode="false"
+        optimize="true"
+        revision="25.0.1"
+        sha1="8873bd0bb5cb9ee37f1b04578eb7e26fcdd44cb0">
+        <dex dex="/Volumes/BACKUP/Android Apps/HospitalApp/app/build/intermediates/pre-dexed/debug/commons-lang3-3.0_a1bed935d19289c6b93c1b7b685b103fd5668226.jar" />
+    </item>
+    <item
+        is-multidex="false"
+        jar="/Users/vineeth/Library/Android/sdk/extras/android/m2repository/com/android/support/support-v4/18.0.0/support-v4-18.0.0.jar"
+        jumboMode="false"
+        optimize="true"
+        revision="25.0.1"
+        sha1="44ec51e9d395a47aab135e5e1b556c0007442156">
+        <dex dex="/Volumes/BACKUP/Android Apps/HospitalApp/app/build/intermediates/pre-dexed/debug/support-v4-18.0.0_00fe90ff3c1ac236e73a715c26fca137bb55142c.jar" />
+    </item>
+    <item
+        is-multidex="false"
+        jar="/Users/vineeth/.gradle/caches/modules-2/files-2.1/com.googlecode.json-simple/json-simple/1.1/5e303a03d04e6788dddfa3655272580ae0fc13bb/json-simple-1.1.jar"
+        jumboMode="false"
+        optimize="true"
+        revision="25.0.1"
+        sha1="5e303a03d04e6788dddfa3655272580ae0fc13bb">
+        <dex dex="/Volumes/BACKUP/Android Apps/HospitalApp/app/build/intermediates/pre-dexed/debug/json-simple-1.1_00e97ecf33cce1559d3595f828a915fc9f97ed4c.jar" />
+    </item>
+
+</items>

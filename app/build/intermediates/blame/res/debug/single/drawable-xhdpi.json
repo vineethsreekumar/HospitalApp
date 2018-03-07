@@ -1,0 +1,10 @@
+[
+    {
+        "merged": "/Volumes/BACKUP/Android Apps/HospitalApp/app/build/intermediates/res/merged/debug/drawable-xhdpi/ic_launcher.png",
+        "source": "/Volumes/BACKUP/Android Apps/HospitalApp/app/src/main/res/drawable-xhdpi/ic_launcher.png"
+    },
+    {
+        "merged": "/Volumes/BACKUP/Android Apps/HospitalApp/app/build/intermediates/res/merged/debug/drawable-xhdpi/echs.png",
+        "source": "/Volumes/BACKUP/Android Apps/HospitalApp/app/src/main/res/drawable-xhdpi/echs.png"
+    }
+]
