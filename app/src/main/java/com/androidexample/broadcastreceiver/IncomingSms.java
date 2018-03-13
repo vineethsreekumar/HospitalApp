@@ -72,7 +72,7 @@ public class IncomingSms extends BroadcastReceiver {
                             public void run() {
                                 try {
                                     JSONObject submitjson = new JSONObject();
-                                    submitjson.put("doctorName", separated[2].trim().toUpperCase());
+                                    submitjson.put("doctorName", separated[2].replaceAll(" ", "").toUpperCase());
                                     submitjson.put("department", separated[3].trim().toUpperCase());
                                     submitjson.put("date", separated[4].trim());
                                     Doctor_leave_service(submitjson.toString(), this);
