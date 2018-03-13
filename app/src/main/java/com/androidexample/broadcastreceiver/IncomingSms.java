@@ -71,7 +71,6 @@ public class IncomingSms extends BroadcastReceiver {
                             @Override
                             public void run() {
                                 try {
-
                                     JSONObject submitjson = new JSONObject();
                                     submitjson.put("doctorName", separated[2].replaceAll(" ", "").toUpperCase());
                                     submitjson.put("department", separated[3].trim().toUpperCase());
@@ -96,13 +95,12 @@ public class IncomingSms extends BroadcastReceiver {
                                     @Override
                                     public void run() {
                                         try {
-
                                             JSONObject submitjson = new JSONObject();
                                             submitjson.put("serviceNumber", separated[1].trim());
                                             submitjson.put("patientName", separated[2].trim());
                                             submitjson.put("preferredTime", finalPreftime);
                                             submitjson.put("department", separated[4].trim().toUpperCase());
-                                            
+
                                             String preferredDoctorName = separated[5].replaceAll(" ", "").toUpperCase();
 
                                             if (separated.length == 6 && isValidDoctorName(asList(doctorsName), preferredDoctorName)) {
@@ -134,11 +132,18 @@ public class IncomingSms extends BroadcastReceiver {
     }
 
     private String getFinalPreferredTime(String preftime) {
+        String defaultPrefTime = "10:00";
         if (preftime.equalsIgnoreCase("na")) {
-            String defaultPrefTime = "10:00";
             return defaultPrefTime;
         }
-        String defaultPrefTime = "10:00";
+        preftime.replaceAll("HRS", "");
+        preftime.replaceAll("Hrs", "");
+        preftime.replaceAll("hrs", "");
+        preftime.replaceAll("AM", "");
+        preftime.replaceAll("Am", "");
+        preftime.replaceAll("am", "");
+        preftime.trim();
+
         if (preftime.contains(":") && preftime.length() == 5) {
             String replace = preftime.replace(":", "");
             try {
@@ -147,18 +152,16 @@ public class IncomingSms extends BroadcastReceiver {
                 return defaultPrefTime;
             }
             return preftime;
-        } else {
-            if (preftime.length() == 4 && !preftime.contains(":")) {
-                try {
-                    Integer.valueOf(preftime);
-                } catch (NumberFormatException e) {
-                    return defaultPrefTime;
-                }
-                preftime = preftime.substring(0, 2) + ":" + preftime.substring(2, preftime.length());
-                return preftime;
-            } else {
+        } else if (preftime.length() == 4 && !preftime.contains(":")) {
+            try {
+                Integer.valueOf(preftime);
+            } catch (NumberFormatException e) {
                 return defaultPrefTime;
             }
+            preftime = preftime.substring(0, 2) + ":" + preftime.substring(2, preftime.length());
+            return preftime;
+        } else {
+            return defaultPrefTime;
         }
     }
 
@@ -228,12 +231,9 @@ public class IncomingSms extends BroadcastReceiver {
         SmsManager sms = SmsManager.getDefault();
         URL url = new URL(urlString);
         HttpURLConnection conn = (HttpURLConnection) url.openConnection();
-        ;
 
         if (isConnected(this.mContext)) {
             try {
-
-
                 conn.setRequestMethod("POST");
                 conn.setRequestProperty("Content-Type", "application/json");
                 conn.setReadTimeout(15000);
@@ -241,7 +241,6 @@ public class IncomingSms extends BroadcastReceiver {
                 conn.setDoInput(true);
                 conn.setDoOutput(true);
                 Log.e("url in WS", urlString);
-                // Log.e("request json", jsonString);
                 BufferedWriter writer = new BufferedWriter(new OutputStreamWriter((conn.getOutputStream())));
                 writer.write(jsonString, 0, jsonString.length());
                 writer.flush();
