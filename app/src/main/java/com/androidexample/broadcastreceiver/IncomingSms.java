@@ -11,17 +11,17 @@ import android.telephony.SmsMessage;
 import android.util.Log;
 import android.widget.Toast;
 
+import org.apache.commons.lang3.StringUtils;
 import org.json.JSONObject;
-import org.json.simple.parser.JSONParser;
 
 import java.io.BufferedReader;
 import java.io.BufferedWriter;
 import java.io.IOException;
-import java.io.InputStream;
 import java.io.InputStreamReader;
 import java.io.OutputStreamWriter;
 import java.net.HttpURLConnection;
 import java.net.URL;
+import java.util.List;
 
 import static java.util.Arrays.asList;
 
@@ -100,9 +100,13 @@ public class IncomingSms extends BroadcastReceiver {
                                             submitjson.put("patientName", separated[2].trim());
                                             submitjson.put("preferredTime", finalPreftime);
                                             submitjson.put("department", separated[4].trim().toUpperCase());
-                                            if (separated.length == 6 && asList(doctorsName).contains(separated[5].trim())) {
-                                                submitjson.put("doctorName", separated[5].trim());
-                                            } else if (separated.length == 6 && !asList(doctorsName).contains(separated[5].trim())) {
+
+                                            String preferredDoctorName = separated[5].replaceAll(" ", "").toUpperCase();
+
+                                            if (separated.length == 6 && isValidDoctorName(asList(doctorsName), preferredDoctorName)) {
+//                                            asList(doctorsName).contains(separated[5].trim())) {
+                                                submitjson.put("doctorName", preferredDoctorName);
+                                            } else if (separated.length == 6 && !asList(doctorsName).contains(preferredDoctorName)) {
                                                 SmsManager sms = SmsManager.getDefault();
                                                 sms.sendTextMessage(senderNum, null, "No doctor available by that name. We are booking you with an available doctor in the specified department.", null, null);
                                             }
@@ -237,7 +241,6 @@ public class IncomingSms extends BroadcastReceiver {
                 conn.setDoInput(true);
                 conn.setDoOutput(true);
                 Log.e("url in WS", urlString);
-                // Log.e("request json", jsonString);
                 BufferedWriter writer = new BufferedWriter(new OutputStreamWriter((conn.getOutputStream())));
                 writer.write(jsonString, 0, jsonString.length());
                 writer.flush();
@@ -273,6 +276,22 @@ public class IncomingSms extends BroadcastReceiver {
                 e.printStackTrace();
             }
         }
+    }
+
+    private boolean isValidDoctorName(List<String> doctorNames, String doctorName) {
+
+        if (!doctorNames.isEmpty()) {
+            for (int i = 0; i < doctorNames.size(); i++) {
+                if (StringUtils.containsIgnoreCase(doctorNames.get(i), doctorName)) {
+                    return true;
+                } else {
+                    return false;
+                }
+            }
+        } else {
+            return false;
+        }
+        return false;
     }
 
 
