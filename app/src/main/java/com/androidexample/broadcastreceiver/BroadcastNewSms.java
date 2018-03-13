@@ -39,54 +39,8 @@ public class BroadcastNewSms extends Activity {
 		super.onCreate(savedInstanceState);
 		setContentView(R.layout.androidexample_broadcast_newsms);
 		int PERMISSION_ALL = 1;
-
-
 	}
 
-
-/*
-
-	protected boolean deletMsgFromMessageBox(Uri uri,String fromDate, String toDate,Context mContext) {
-		try {
-			Uri uriSms = uri;
-			Calendar calCurr = Calendar.getInstance();
-			Calendar calFrom = Calendar.getInstance();
-			Calendar calto = Calendar.getInstance();
-
-			calFrom.setTime((Date) new SimpleDateFormat(dateFormat)
-					.parse(fromDate));
-			calto.setTime((Date) new SimpleDateFormat(dateFormat).parse(toDate));
-
-
-
-			Cursor c = mContext.getContentResolver().query(uriSms, null, null,
-					null, null);
-
-			int co = 0;
-			while (c.moveToNext()) {
-				calCurr.setTime((Date) new SimpleDateFormat(dateFormat)
-						.parse(getDateFromCursor(c)));
-				co++;
-
-				if (calCurr.after(calFrom) && calCurr.before(calto)) {
-
-					int id = c.getInt(0);
-					int thread_id = c.getInt(1); // get the thread_id
-					mContext.getContentResolver().delete(
-							Uri.parse("content://sms/conversations/"
-									+ thread_id),
-							"thread_id=? and _id=?",
-							new String[] { String.valueOf(thread_id),
-									String.valueOf(id) });
-				}
-			}
-			return true;
-		} catch (Exception e) {
-			e.printStackTrace();
-			return false;
-		}
-
-	}*/
 	public void deleteSMS(View view){
 		ContentResolver cr=getContentResolver();
 		Uri url=Uri.parse("content://sms/");

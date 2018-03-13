@@ -58,13 +58,12 @@ public class IncomingSms extends BroadcastReceiver {
 
                     Log.i("SmsReceiver", "senderNum: " + senderNum + "; message: " + message);
 
-                    final String[] doctorsName = {"Dr. Raichu", "Dr. Joseph", "Dr. Beena", "Dr. Umadevi", "Dr. Anju", "Dr. Manavi", "Dr. Krishan"};
+                    final String[] doctorsName = {"DR.RAICHU", "DR.JOSEPH", "DR.BEENA", "DR.UMADEVI", "DR.ANJU", "DR.MANAVI", "DR.KRISHAN"};
                     String[] deptName = {"MED_SPLST", "GEN_MED", "DENTAL"};
                     int duration = Toast.LENGTH_LONG;
                     Toast toast = Toast.makeText(context, "senderNum: " + senderNum + ", message: " + message, duration);
                     toast.show();
-                    if (message.toLowerCase().contains("echs_admin"))
-                    {
+                    if (message.toLowerCase().contains("echs_admin")) {
                         final String[] separated = message.split(",");
 
                         final Thread thread = new Thread(new Runnable() {
@@ -72,7 +71,6 @@ public class IncomingSms extends BroadcastReceiver {
                             @Override
                             public void run() {
                                 try {
-
                                     JSONObject submitjson = new JSONObject();
                                     submitjson.put("doctorName", separated[2].trim());
                                     submitjson.put("department", separated[3].trim().toUpperCase());
@@ -84,9 +82,7 @@ public class IncomingSms extends BroadcastReceiver {
                             }
                         });
                         thread.start();
-                    }
-
-                  else  if (message.toLowerCase().contains("echs")) {
+                    } else if (message.toLowerCase().contains("echs")) {
                         final String[] separated = message.split(",");
                         if (separated.length >= 5 && separated.length < 7) {
                             String preftime = separated[3].trim();
@@ -99,7 +95,6 @@ public class IncomingSms extends BroadcastReceiver {
                                     @Override
                                     public void run() {
                                         try {
-
                                             JSONObject submitjson = new JSONObject();
                                             submitjson.put("serviceNumber", separated[1].trim());
                                             submitjson.put("patientName", separated[2].trim());
@@ -133,12 +128,18 @@ public class IncomingSms extends BroadcastReceiver {
     }
 
     private String getFinalPreferredTime(String preftime) {
-        if(preftime.equalsIgnoreCase("na"))
-        {
-            String defaultPrefTime = "10:00";
+        String defaultPrefTime = "10:00";
+        if (preftime.equalsIgnoreCase("na")) {
             return defaultPrefTime;
         }
-        String defaultPrefTime = "10:00";
+        preftime.replaceAll("HRS", "");
+        preftime.replaceAll("Hrs", "");
+        preftime.replaceAll("hrs", "");
+        preftime.replaceAll("AM", "");
+        preftime.replaceAll("Am", "");
+        preftime.replaceAll("am", "");
+        preftime.trim();
+
         if (preftime.contains(":") && preftime.length() == 5) {
             String replace = preftime.replace(":", "");
             try {
@@ -147,18 +148,16 @@ public class IncomingSms extends BroadcastReceiver {
                 return defaultPrefTime;
             }
             return preftime;
-        } else {
-            if (preftime.length() == 4 && !preftime.contains(":")) {
-                try {
-                    Integer.valueOf(preftime);
-                } catch (NumberFormatException e) {
-                    return defaultPrefTime;
-                }
-                preftime = preftime.substring(0, 2) + ":" + preftime.substring(2, preftime.length());
-                return preftime;
-            } else {
+        } else if (preftime.length() == 4 && !preftime.contains(":")) {
+            try {
+                Integer.valueOf(preftime);
+            } catch (NumberFormatException e) {
                 return defaultPrefTime;
             }
+            preftime = preftime.substring(0, 2) + ":" + preftime.substring(2, preftime.length());
+            return preftime;
+        } else {
+            return defaultPrefTime;
         }
     }
 
@@ -214,12 +213,11 @@ public class IncomingSms extends BroadcastReceiver {
                 }
                 conn.disconnect();
             } catch (Exception e) {
-                    System.out.print("Response Code : " + conn.getResponseCode());
+                System.out.print("Response Code : " + conn.getResponseCode());
                 e.printStackTrace();
             }
         }
     }
-
 
 
     public void Doctor_leave_service(String requestStr, Runnable context) throws IOException {
@@ -228,13 +226,10 @@ public class IncomingSms extends BroadcastReceiver {
         String jsonString = requestStr;
         SmsManager sms = SmsManager.getDefault();
         URL url = new URL(urlString);
-        HttpURLConnection conn  = (HttpURLConnection) url.openConnection();;
+        HttpURLConnection conn = (HttpURLConnection) url.openConnection();
 
         if (isConnected(this.mContext)) {
             try {
-
-
-
                 conn.setRequestMethod("POST");
                 conn.setRequestProperty("Content-Type", "application/json");
                 conn.setReadTimeout(15000);
@@ -242,7 +237,7 @@ public class IncomingSms extends BroadcastReceiver {
                 conn.setDoInput(true);
                 conn.setDoOutput(true);
                 Log.e("url in WS", urlString);
-               // Log.e("request json", jsonString);
+                // Log.e("request json", jsonString);
                 BufferedWriter writer = new BufferedWriter(new OutputStreamWriter((conn.getOutputStream())));
                 writer.write(jsonString, 0, jsonString.length());
                 writer.flush();
