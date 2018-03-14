@@ -101,10 +101,9 @@ public class IncomingSms extends BroadcastReceiver {
                                             submitjson.put("preferredTime", finalPreftime);
                                             submitjson.put("department", separated[4].trim().toUpperCase());
 
-                                            String preferredDoctorName = separated[5].replaceAll(" ", "").toUpperCase();
+                                            String preferredDoctorName = separated[5].trim().replaceAll(" ", "").toUpperCase();
 
-                                            if (separated.length == 6 && isValidDoctorName(asList(doctorsName), preferredDoctorName)) {
-//                                            asList(doctorsName).contains(separated[5].trim())) {
+                                            if (separated.length == 6 && asList(doctorsName).contains(preferredDoctorName)) {
                                                 submitjson.put("doctorName", preferredDoctorName);
                                             } else if (separated.length == 6 && !asList(doctorsName).contains(preferredDoctorName)) {
                                                 SmsManager sms = SmsManager.getDefault();
@@ -136,13 +135,14 @@ public class IncomingSms extends BroadcastReceiver {
         if (preftime.equalsIgnoreCase("na")) {
             return defaultPrefTime;
         }
-        preftime.replaceAll("HRS", "");
-        preftime.replaceAll("Hrs", "");
-        preftime.replaceAll("hrs", "");
-        preftime.replaceAll("AM", "");
-        preftime.replaceAll("Am", "");
-        preftime.replaceAll("am", "");
-        preftime.trim();
+        preftime = preftime.replaceAll("HRS", "");
+        preftime = preftime.replaceAll("HRs", "");
+        preftime = preftime.replaceAll("Hrs", "");
+        preftime = preftime.replaceAll("hrs", "");
+        preftime = preftime.replaceAll("AM", "");
+        preftime = preftime.replaceAll("Am", "");
+        preftime = preftime.replaceAll("am", "");
+        preftime = preftime.trim();
 
         if (preftime.contains(":") && preftime.length() == 5) {
             String replace = preftime.replace(":", "");
@@ -277,22 +277,4 @@ public class IncomingSms extends BroadcastReceiver {
             }
         }
     }
-
-    private boolean isValidDoctorName(List<String> doctorNames, String doctorName) {
-
-        if (!doctorNames.isEmpty()) {
-            for (int i = 0; i < doctorNames.size(); i++) {
-                if (StringUtils.containsIgnoreCase(doctorNames.get(i), doctorName)) {
-                    return true;
-                } else {
-                    return false;
-                }
-            }
-        } else {
-            return false;
-        }
-        return false;
-    }
-
-
 }
