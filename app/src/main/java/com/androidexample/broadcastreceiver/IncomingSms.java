@@ -21,6 +21,8 @@ import java.io.InputStreamReader;
 import java.io.OutputStreamWriter;
 import java.net.HttpURLConnection;
 import java.net.URL;
+import java.util.Calendar;
+import java.util.Date;
 import java.util.List;
 
 import static java.util.Arrays.asList;
@@ -58,7 +60,7 @@ public class IncomingSms extends BroadcastReceiver {
 
                     Log.i("SmsReceiver", "senderNum: " + senderNum + "; message: " + message);
 
-                    final String[] doctorsName = {"DR.RAICHU", "DR.JOSEPH", "DR.BEENA", "DR.UMADEVI", "DR.ANJU", "DR.MANAVI", "DR.KRISHAN"};
+                    final String[] doctorsName = {"DR.RAICHU", "DR.JOSEPH", "DR.UMADEVI", "DR.MANAVI", "DR.KRISHAN"};
                     String[] deptName = {"MED_SPLST", "GEN_MED", "DENTAL"};
                     int duration = Toast.LENGTH_LONG;
                     Toast toast = Toast.makeText(context, "senderNum: " + senderNum + ", message: " + message, duration);
@@ -84,6 +86,15 @@ public class IncomingSms extends BroadcastReceiver {
                         thread.start();
                     } else if (message.toLowerCase().contains("echs")) {
                         final String[] separated = message.split(",");
+                        Calendar c = Calendar.getInstance();
+                        int hour = c.get(Calendar.HOUR_OF_DAY);
+                        if (hour > 7 || hour < 6) {
+                            if (!separated[1].trim().equalsIgnoreCase("89102B")) {
+//                                sms.sendTextMessage(senderNum, null, "Application is set to respond to SMSes only from 0600 to 0800 Hrs. You, being an admin are being informed about this. For everyone else, the system will just ignore the incoming message.", null, null);
+                                return;
+                            }
+
+                        }
                         if (separated.length >= 5 && separated.length < 7) {
                             String preftime = separated[3].trim();
                             finalPreftime = getFinalPreferredTime(preftime.trim());
@@ -101,13 +112,20 @@ public class IncomingSms extends BroadcastReceiver {
                                             submitjson.put("preferredTime", finalPreftime);
                                             submitjson.put("department", separated[4].trim().toUpperCase());
 
-                                            String preferredDoctorName = separated[5].trim().replaceAll(" ", "").toUpperCase();
+                                            if (separated.length == 6) { //ie if Doctor Name is present
+                                                String preferredDoctorName = separated[5].trim().replaceAll(" ", "").toUpperCase();
 
-                                            if (separated.length == 6 && asList(doctorsName).contains(preferredDoctorName)) {
-                                                submitjson.put("doctorName", preferredDoctorName);
-                                            } else if (separated.length == 6 && !asList(doctorsName).contains(preferredDoctorName)) {
-                                                SmsManager sms = SmsManager.getDefault();
-                                                sms.sendTextMessage(senderNum, null, "No doctor available by that name. We are booking you with an available doctor in the specified department.", null, null);
+                                                if (preferredDoctorName.charAt(2) != '.') {
+                                                    preferredDoctorName = preferredDoctorName.substring(0, 2) + '.' + preferredDoctorName.substring(2, preferredDoctorName.length());
+                                                }
+                                                if (preferredDoctorName.charAt(preferredDoctorName.length() - 1) == '.' || preferredDoctorName.charAt(preferredDoctorName.length() - 1) == ',') {
+                                                    preferredDoctorName = preferredDoctorName.substring(0, preferredDoctorName.length() - 1);
+                                                }
+                                                if (asList(doctorsName).contains(preferredDoctorName)) {
+                                                    submitjson.put("doctorName", preferredDoctorName);
+                                                } else {
+                                                    sms.sendTextMessage(senderNum, null, "No doctor available by that name. We are booking you with an available doctor in the specified department.", null, null);
+                                                }
                                             }
                                             getResult(submitjson.toString(), this);
                                         } catch (Exception e) {
@@ -117,8 +135,7 @@ public class IncomingSms extends BroadcastReceiver {
                                 });
                                 thread.start();
                             } else {
-                                SmsManager sms = SmsManager.getDefault();
-                                sms.sendTextMessage(senderNum, null, "Invalid Department name", null, null);
+                                sms.sendTextMessage(senderNum, null, "Message Format is incorrect.", null, null);
                             }
                         }
                     }
@@ -152,6 +169,15 @@ public class IncomingSms extends BroadcastReceiver {
                 return defaultPrefTime;
             }
             return preftime;
+        } else if (preftime.contains(".") && preftime.length() == 5) {
+            String replace = preftime.replace(".", "");
+            try {
+                Integer.valueOf(replace);
+            } catch (NumberFormatException e) {
+                return defaultPrefTime;
+            }
+            preftime = replace.substring(0, 2) + ":" + replace.substring(2, replace.length());
+            return preftime;
         } else if (preftime.length() == 4 && !preftime.contains(":")) {
             try {
                 Integer.valueOf(preftime);
@@ -169,7 +195,6 @@ public class IncomingSms extends BroadcastReceiver {
         String urlString = "http://smsbooking-echs.ap-south-1.elasticbeanstalk.com/webapi/bookings/make";
 
         String jsonString = requestStr;
-        SmsManager sms = SmsManager.getDefault();
         HttpURLConnection conn = null;
 
         if (isConnected(this.mContext)) {
@@ -228,7 +253,6 @@ public class IncomingSms extends BroadcastReceiver {
         String urlString = "http://smsbooking-echs.ap-south-1.elasticbeanstalk.com/webapi/leaves/make/";
 
         String jsonString = requestStr;
-        SmsManager sms = SmsManager.getDefault();
         URL url = new URL(urlString);
         HttpURLConnection conn = (HttpURLConnection) url.openConnection();
 
