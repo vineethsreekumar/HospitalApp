@@ -60,7 +60,7 @@ public class IncomingSms extends BroadcastReceiver {
 
                     Log.i("SmsReceiver", "senderNum: " + senderNum + "; message: " + message);
 
-                    final String[] doctorsName = {"DR.RAICHU", "DR.JOSEPH", "DR.UMADEVI", "DR.MANAVI", "DR.KRISHAN"};
+                    final String[] doctorsName = {"DR.RAICHU", "DR.JOSEPH", "DR.UMADEVI", "DR.MANAVI", "DR.KRISHAN", "DR.VIGY", "DR.SUTANAYA", "DR.KOSHI"};
                     String[] deptName = {"MED_SPLST", "GEN_MED", "DENTAL"};
                     int duration = Toast.LENGTH_LONG;
                     Toast toast = Toast.makeText(context, "senderNum: " + senderNum + ", message: " + message, duration);
@@ -90,7 +90,6 @@ public class IncomingSms extends BroadcastReceiver {
                         int hour = c.get(Calendar.HOUR_OF_DAY);
                         if (hour > 7 || hour < 6) {
                             if (!separated[1].trim().equalsIgnoreCase("89102B")) {
-//                                sms.sendTextMessage(senderNum, null, "Application is set to respond to SMSes only from 0600 to 0800 Hrs. You, being an admin are being informed about this. For everyone else, the system will just ignore the incoming message.", null, null);
                                 return;
                             }
 
@@ -99,7 +98,9 @@ public class IncomingSms extends BroadcastReceiver {
                             String preftime = separated[3].trim();
                             finalPreftime = getFinalPreferredTime(preftime.trim());
 
-                            if (asList(deptName).contains(separated[4].trim().toUpperCase())) {
+                            final String dept = separated[4].trim().toUpperCase().replace('-', '_').replace(' ', '_').replaceAll("__", "_");
+
+                            if (asList(deptName).contains(dept)) {
 
                                 final Thread thread = new Thread(new Runnable() {
 
@@ -110,7 +111,7 @@ public class IncomingSms extends BroadcastReceiver {
                                             submitjson.put("serviceNumber", separated[1].trim());
                                             submitjson.put("patientName", separated[2].trim());
                                             submitjson.put("preferredTime", finalPreftime);
-                                            submitjson.put("department", separated[4].trim().toUpperCase());
+                                            submitjson.put("department", dept);
 
                                             if (separated.length == 6) { //ie if Doctor Name is present
                                                 String preferredDoctorName = separated[5].trim().replaceAll(" ", "").toUpperCase();
@@ -160,6 +161,10 @@ public class IncomingSms extends BroadcastReceiver {
         preftime = preftime.replaceAll("Am", "");
         preftime = preftime.replaceAll("am", "");
         preftime = preftime.trim();
+
+        if (preftime.length() == 2) {
+            preftime = preftime.concat(":00");
+        }
 
         if (preftime.contains(":") && preftime.length() == 5) {
             String replace = preftime.replace(":", "");
