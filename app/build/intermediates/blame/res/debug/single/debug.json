@@ -1,0 +1,26 @@
+[
+    {
+        "merged": "/Users/sujithsreekumar/Projects/HospitalApp/app/build/intermediates/res/merged/debug/drawable-mdpi_ic_launcher.png.flat",
+        "source": "/Users/sujithsreekumar/Projects/HospitalApp/app/src/main/res/drawable-mdpi/ic_launcher.png"
+    },
+    {
+        "merged": "/Users/sujithsreekumar/Projects/HospitalApp/app/build/intermediates/res/merged/debug/layout_androidexample_broadcast_newsms.xml.flat",
+        "source": "/Users/sujithsreekumar/Projects/HospitalApp/app/src/main/res/layout/androidexample_broadcast_newsms.xml"
+    },
+    {
+        "merged": "/Users/sujithsreekumar/Projects/HospitalApp/app/build/intermediates/res/merged/debug/drawable-ldpi_ic_launcher.png.flat",
+        "source": "/Users/sujithsreekumar/Projects/HospitalApp/app/src/main/res/drawable-ldpi/ic_launcher.png"
+    },
+    {
+        "merged": "/Users/sujithsreekumar/Projects/HospitalApp/app/build/intermediates/res/merged/debug/drawable-hdpi_ic_launcher.png.flat",
+        "source": "/Users/sujithsreekumar/Projects/HospitalApp/app/src/main/res/drawable-hdpi/ic_launcher.png"
+    },
+    {
+        "merged": "/Users/sujithsreekumar/Projects/HospitalApp/app/build/intermediates/res/merged/debug/drawable-xhdpi_echs.png.flat",
+        "source": "/Users/sujithsreekumar/Projects/HospitalApp/app/src/main/res/drawable-xhdpi/echs.png"
+    },
+    {
+        "merged": "/Users/sujithsreekumar/Projects/HospitalApp/app/build/intermediates/res/merged/debug/drawable-xhdpi_ic_launcher.png.flat",
+        "source": "/Users/sujithsreekumar/Projects/HospitalApp/app/src/main/res/drawable-xhdpi/ic_launcher.png"
+    }
+]
