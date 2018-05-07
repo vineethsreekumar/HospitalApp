@@ -60,7 +60,7 @@ public class IncomingSms extends BroadcastReceiver {
 
                     Log.i("SmsReceiver", "senderNum: " + senderNum + "; message: " + message);
 
-                    final String[] doctorsName = {"DR.RAICHU", "DR.JOSEPH", "DR.UMADEVI", "DR.MANAVI", "DR.KRISHAN", "DR.VIGY", "DR.SUTANAYA", "DR.KOSHI"};
+                    final String[] doctorsName = {"DR.RAICHU", "DR.JOSEPH", "DR.UMADEVI", "DR.MANAVI", "DR.KRISHAN", "DR.VIGY", "DR.SUDHA", "DR.KOSHI"};
                     String[] deptName = {"MED_SPLST", "GEN_MED", "DENTAL"};
                     int duration = Toast.LENGTH_LONG;
                     Toast toast = Toast.makeText(context, "senderNum: " + senderNum + ", message: " + message, duration);
@@ -88,7 +88,7 @@ public class IncomingSms extends BroadcastReceiver {
                         final String[] separated = message.split(",");
                         Calendar c = Calendar.getInstance();
                         int hour = c.get(Calendar.HOUR_OF_DAY);
-                        if (hour > 7 || hour < 6) {
+                        if (hour > 7 || hour < 5) {
                             if (!separated[1].trim().equalsIgnoreCase("89102B")) {
                                 return;
                             }

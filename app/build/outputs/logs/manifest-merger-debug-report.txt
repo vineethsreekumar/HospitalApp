@@ -4,7 +4,7 @@ ADDED from /Users/sujithsreekumar/Projects/HospitalApp/app/src/main/AndroidManif
 INJECTED from /Users/sujithsreekumar/Projects/HospitalApp/app/src/main/AndroidManifest.xml:2:1-42:12
 INJECTED from /Users/sujithsreekumar/Projects/HospitalApp/app/src/main/AndroidManifest.xml:2:1-42:12
 INJECTED from /Users/sujithsreekumar/Projects/HospitalApp/app/src/main/AndroidManifest.xml:2:1-42:12
-MERGED from [com.android.support:support-v4:23.4.0] /Users/sujithsreekumar/.gradle/caches/transforms-1/files-1.1/support-v4-23.4.0.aar/dca3ecf82d50fd30e0f5a0e90e940777/AndroidManifest.xml:17:1-24:12
+MERGED from [com.android.support:support-v4:23.4.0] /Users/sujithsreekumar/.gradle/caches/transforms-1/files-1.1/support-v4-23.4.0.aar/9bf568cea105bb61b9575c448fd88ff4/AndroidManifest.xml:17:1-24:12
 INJECTED from /Users/sujithsreekumar/Projects/HospitalApp/app/src/main/AndroidManifest.xml:2:1-42:12
 INJECTED from /Users/sujithsreekumar/Projects/HospitalApp/app/src/main/AndroidManifest.xml:2:1-42:12
 INJECTED from /Users/sujithsreekumar/Projects/HospitalApp/app/src/main/AndroidManifest.xml:2:1-42:12
@@ -24,8 +24,8 @@ INJECTED from /Users/sujithsreekumar/Projects/HospitalApp/app/src/main/AndroidMa
 		INJECTED from /Users/sujithsreekumar/Projects/HospitalApp/app/src/main/AndroidManifest.xml
 application
 ADDED from /Users/sujithsreekumar/Projects/HospitalApp/app/src/main/AndroidManifest.xml:7:5-30:19
-MERGED from [com.android.support:support-v4:23.4.0] /Users/sujithsreekumar/.gradle/caches/transforms-1/files-1.1/support-v4-23.4.0.aar/dca3ecf82d50fd30e0f5a0e90e940777/AndroidManifest.xml:22:5-20
-MERGED from [com.android.support:support-v4:23.4.0] /Users/sujithsreekumar/.gradle/caches/transforms-1/files-1.1/support-v4-23.4.0.aar/dca3ecf82d50fd30e0f5a0e90e940777/AndroidManifest.xml:22:5-20
+MERGED from [com.android.support:support-v4:23.4.0] /Users/sujithsreekumar/.gradle/caches/transforms-1/files-1.1/support-v4-23.4.0.aar/9bf568cea105bb61b9575c448fd88ff4/AndroidManifest.xml:22:5-20
+MERGED from [com.android.support:support-v4:23.4.0] /Users/sujithsreekumar/.gradle/caches/transforms-1/files-1.1/support-v4-23.4.0.aar/9bf568cea105bb61b9575c448fd88ff4/AndroidManifest.xml:22:5-20
 	android:label
 		ADDED from /Users/sujithsreekumar/Projects/HospitalApp/app/src/main/AndroidManifest.xml:10:9-41
 	android:icon
@@ -40,7 +40,7 @@ ADDED from /Users/sujithsreekumar/Projects/HospitalApp/app/src/main/AndroidManif
 		ADDED from /Users/sujithsreekumar/Projects/HospitalApp/app/src/main/AndroidManifest.xml:15:13-45
 	android:name
 		ADDED from /Users/sujithsreekumar/Projects/HospitalApp/app/src/main/AndroidManifest.xml:14:13-80
-intent-filter#android.intent.action.MAIN+android.intent.category.LAUNCHER
+intent-filter#action:name:android.intent.action.MAIN+category:name:android.intent.category.LAUNCHER
 ADDED from /Users/sujithsreekumar/Projects/HospitalApp/app/src/main/AndroidManifest.xml:17:13-21:29
 action#android.intent.action.MAIN
 ADDED from /Users/sujithsreekumar/Projects/HospitalApp/app/src/main/AndroidManifest.xml:18:17-69
@@ -54,7 +54,7 @@ receiver#com.androidexample.broadcastreceiver.IncomingSms
 ADDED from /Users/sujithsreekumar/Projects/HospitalApp/app/src/main/AndroidManifest.xml:24:9-28:20
 	android:name
 		ADDED from /Users/sujithsreekumar/Projects/HospitalApp/app/src/main/AndroidManifest.xml:24:19-82
-intent-filter#android.provider.Telephony.SMS_RECEIVED
+intent-filter#action:name:android.provider.Telephony.SMS_RECEIVED
 ADDED from /Users/sujithsreekumar/Projects/HospitalApp/app/src/main/AndroidManifest.xml:25:13-27:20
 action#android.provider.Telephony.SMS_RECEIVED
 ADDED from /Users/sujithsreekumar/Projects/HospitalApp/app/src/main/AndroidManifest.xml:26:5-70
@@ -92,8 +92,8 @@ uses-sdk
 INJECTED from /Users/sujithsreekumar/Projects/HospitalApp/app/src/main/AndroidManifest.xml reason: use-sdk injection requested
 INJECTED from /Users/sujithsreekumar/Projects/HospitalApp/app/src/main/AndroidManifest.xml
 INJECTED from /Users/sujithsreekumar/Projects/HospitalApp/app/src/main/AndroidManifest.xml
-MERGED from [com.android.support:support-v4:23.4.0] /Users/sujithsreekumar/.gradle/caches/transforms-1/files-1.1/support-v4-23.4.0.aar/dca3ecf82d50fd30e0f5a0e90e940777/AndroidManifest.xml:20:5-43
-MERGED from [com.android.support:support-v4:23.4.0] /Users/sujithsreekumar/.gradle/caches/transforms-1/files-1.1/support-v4-23.4.0.aar/dca3ecf82d50fd30e0f5a0e90e940777/AndroidManifest.xml:20:5-43
+MERGED from [com.android.support:support-v4:23.4.0] /Users/sujithsreekumar/.gradle/caches/transforms-1/files-1.1/support-v4-23.4.0.aar/9bf568cea105bb61b9575c448fd88ff4/AndroidManifest.xml:20:5-43
+MERGED from [com.android.support:support-v4:23.4.0] /Users/sujithsreekumar/.gradle/caches/transforms-1/files-1.1/support-v4-23.4.0.aar/9bf568cea105bb61b9575c448fd88ff4/AndroidManifest.xml:20:5-43
 INJECTED from /Users/sujithsreekumar/Projects/HospitalApp/app/src/main/AndroidManifest.xml
 INJECTED from /Users/sujithsreekumar/Projects/HospitalApp/app/src/main/AndroidManifest.xml
 	android:targetSdkVersion
