@@ -124,8 +124,6 @@ public class IncomingSms extends BroadcastReceiver {
                                                 }
                                                 if (asList(doctorsName).contains(preferredDoctorName)) {
                                                     submitjson.put("doctorName", preferredDoctorName);
-                                                } else {
-                                                    sms.sendTextMessage(senderNum, null, "No doctor available by that name. We are booking you with an available doctor in the specified department.", null, null);
                                                 }
                                             }
                                             getResult(submitjson.toString(), this);
@@ -136,7 +134,7 @@ public class IncomingSms extends BroadcastReceiver {
                                 });
                                 thread.start();
                             } else {
-                                sms.sendTextMessage(senderNum, null, "Message Format is incorrect.", null, null);
+                                sms.sendTextMessage(senderNum, null, "Message Format is incorrect. Correct format is :\n \nECHS, SERVICE_NUMBER, PATIENT_NAME, PREFERRED_TIME, DEPARTMENT, DOCTOR_NAME", null, null);
                             }
                         }
                     }
