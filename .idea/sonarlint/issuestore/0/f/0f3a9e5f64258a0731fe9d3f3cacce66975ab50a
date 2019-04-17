@@ -1,0 +1,19 @@
+
+gsquid:S1192"KDefine a constant instead of duplicating this literal "department" 3 times.(ŒœË›8ºœËØÏ,
+T
+squid:S106"9Replace this use of System.out or System.err by a logger.(üæç¸8ºœËØÏ,
+ssquid:S3776"RRefactor this method to reduce its Cognitive Complexity from 73 to the 15 allowed.(ÔÊÑÆùÿÿÿÿ8ºœËØÏ,
+Psquid:S1066"/Merge this if statement with the enclosing one.(ßîöÆøÿÿÿÿ8ºœËØÏ,
+^squid:S2259"BA "NullPointerException" could be thrown; "conn" is nullable here.(ˆçÊ8ºœËØÏ,
+Dsquid:S1148"#Use a logger to log this exception.(€ÉÔ…ıÿÿÿÿ8ºœËØÏ,
+T
+squid:S106"9Replace this use of System.out or System.err by a logger.(ˆçÊ8ºœËØÏ,
+Dsquid:S1148"#Use a logger to log this exception.(€ÉÔ…ıÿÿÿÿ8ºœËØÏ,
+lsquid:S1192"KDefine a constant instead of duplicating this literal "doctorName" 4 times.( ¶¸şÿÿÿÿ8ºœËØÏ,
+hsquid:S1192"MDefine a constant instead of duplicating this literal "errorMessage" 4 times.(¨©G8ºœËØÏ,
+T
+squid:S106"9Replace this use of System.out or System.err by a logger.(ˆçÊ8ºœËØÏ,
+Dsquid:S1148"#Use a logger to log this exception.(€ÉÔ…ıÿÿÿÿ8ºœËØÏ,
+Dsquid:S1148"#Use a logger to log this exception.(€ÉÔ…ıÿÿÿÿ8ºœËØÏ,
+T
+squid:S106"9Replace this use of System.out or System.err by a logger.(üæç¸8ºœËØÏ,

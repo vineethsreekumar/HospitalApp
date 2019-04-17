@@ -10,8 +10,6 @@ import android.telephony.SmsManager;
 import android.telephony.SmsMessage;
 import android.util.Log;
 import android.widget.Toast;
-
-import org.apache.commons.lang3.StringUtils;
 import org.json.JSONObject;
 
 import java.io.BufferedReader;
@@ -22,8 +20,6 @@ import java.io.OutputStreamWriter;
 import java.net.HttpURLConnection;
 import java.net.URL;
 import java.util.Calendar;
-import java.util.Date;
-import java.util.List;
 
 import static java.util.Arrays.asList;
 
@@ -60,7 +56,7 @@ public class IncomingSms extends BroadcastReceiver {
 
                     Log.i("SmsReceiver", "senderNum: " + senderNum + "; message: " + message);
 
-                    final String[] doctorsName = {"DR.RAICHU", "DR.JOSEPH", "DR.UMADEVI", "DR.MANAVI", "DR.KRISHAN", "DR.VIGY", "DR.SUDHA", "DR.KOSHI"};
+                    final String[] doctorsName = {"DR.RAICHU", "DR.JOSEPH", "DR.UMADEVI", "DR.MANAVI", "DR.KRISHAN", "DR.VIGY", "DR.SUTANAYA", "DR.KOSHI", "DR.SUDHA"};
                     String[] deptName = {"MED_SPLST", "GEN_MED", "DENTAL"};
                     int duration = Toast.LENGTH_LONG;
                     Toast toast = Toast.makeText(context, "senderNum: " + senderNum + ", message: " + message, duration);
@@ -88,11 +84,10 @@ public class IncomingSms extends BroadcastReceiver {
                         final String[] separated = message.split(",");
                         Calendar c = Calendar.getInstance();
                         int hour = c.get(Calendar.HOUR_OF_DAY);
-                        if (hour > 7 || hour < 5) {
+                        if (hour > 21 || hour < 16) {
                             if (!separated[1].trim().equalsIgnoreCase("89102B")) {
                                 return;
                             }
-
                         }
                         if (separated.length >= 5 && separated.length < 7) {
                             String preftime = separated[3].trim();
@@ -134,7 +129,7 @@ public class IncomingSms extends BroadcastReceiver {
                                 });
                                 thread.start();
                             } else {
-                                sms.sendTextMessage(senderNum, null, "Message Format is incorrect. Correct format is :\n \nECHS, SERVICE_NUMBER, PATIENT_NAME, PREFERRED_TIME, DEPARTMENT, DOCTOR_NAME", null, null);
+//                                sms.sendTextMessage(senderNum, null, "Message Format is incorrect. Correct format is :\n \nECHS, SERVICE_NUMBER, PATIENT_NAME, PREFERRED_TIME, DEPARTMENT, DOCTOR_NAME. \n\nAvailable departments are : MED_SPLST(DR.RAICHU, DR.JOSEPH), GEN_MED(DR.UMADEVI, DR.VIGY, DR.SUTANAYA, DR.KOSHI) and DENTAL(DR.MANAVI, DR.KRISHAN). \n\nPlease check if you have mentioned the department name correctly. \n\nAlso verify that you have put commas between each field.", null, null);
                             }
                         }
                     }
@@ -147,7 +142,7 @@ public class IncomingSms extends BroadcastReceiver {
     }
 
     private String getFinalPreferredTime(String preftime) {
-        String defaultPrefTime = "10:00";
+        String defaultPrefTime = "08:15";
         if (preftime.equalsIgnoreCase("na")) {
             return defaultPrefTime;
         }
@@ -228,16 +223,20 @@ public class IncomingSms extends BroadcastReceiver {
                 br.close();
                 System.out.println("SMS RESPONSE :" + sb.toString());
                 JSONObject jsonObj = new JSONObject(sb.toString());
-                if (jsonObj.has("errorMessage")) {
+                if (jsonObj.has("errorMessage")
+                        && (jsonObj.get("errorMessage").toString().equals("No doctor available today for this department") ||
+                        jsonObj.get("errorMessage").toString().equals("No appointments available for this department."))) {
                     StringBuilder failureMessage = new StringBuilder();
-                    failureMessage.append("Sorry.. Your booking could not be confirmed. Reason : ")
+                    failureMessage.append("Your booking could not be confirmed. Reason : ")
                             .append(jsonObj.getString("errorMessage"));
-                    sms.sendTextMessage(senderNum, null, failureMessage.toString(), null, null);
+//                    sms.sendTextMessage(senderNum, null, failureMessage.toString(), null, null);
                 } else {
                     StringBuilder successMesage = new StringBuilder();
-                    successMesage.append("Your booking with ")
+                    successMesage.append("Your appointment with ")
                             .append(jsonObj.getString("doctorName"))
                             .append(" is confirmed for ")
+                            .append(jsonObj.getString("date"))
+                            .append(" at ")
                             .append(jsonObj.getString("allottedTime").replace(":", ""))
                             .append(" Hrs")
                             .append(".");

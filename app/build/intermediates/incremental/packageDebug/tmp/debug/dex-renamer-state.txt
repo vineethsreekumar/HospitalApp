@@ -1,7 +1,19 @@
-#Wed May 02 19:04:40 IST 2018
-base.0=/Users/sujithsreekumar/Projects/HospitalApp/app/build/intermediates/transforms/dexMerger/debug/12
+#Thu Mar 28 23:10:46 IST 2019
 path.1=classes.dex
-renamed.1=classes2.dex
 path.0=classes.dex
+renamed.5=classes6.dex
+renamed.4=classes5.dex
+renamed.3=classes4.dex
+renamed.2=classes3.dex
+renamed.1=classes2.dex
 renamed.0=classes.dex
-base.1=/Users/sujithsreekumar/Projects/HospitalApp/app/build/intermediates/transforms/dexMerger/debug/11
+base.5=/Users/sujithsreekumar/Projects/HospitalApp/app/build/intermediates/transforms/dexMerger/debug/35
+base.4=/Users/sujithsreekumar/Projects/HospitalApp/app/build/intermediates/transforms/dexMerger/debug/32
+base.3=/Users/sujithsreekumar/Projects/HospitalApp/app/build/intermediates/transforms/dexMerger/debug/34
+base.2=/Users/sujithsreekumar/Projects/HospitalApp/app/build/intermediates/transforms/dexMerger/debug/31
+base.1=/Users/sujithsreekumar/Projects/HospitalApp/app/build/intermediates/transforms/dexMerger/debug/36
+base.0=/Users/sujithsreekumar/Projects/HospitalApp/app/build/intermediates/transforms/dexMerger/debug/33
+path.5=classes.dex
+path.4=classes.dex
+path.3=classes.dex
+path.2=classes.dex
